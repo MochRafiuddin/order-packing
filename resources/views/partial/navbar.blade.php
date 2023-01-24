@@ -71,7 +71,7 @@ use App\Traits\Helper;
             </li> -->
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">                    
-                    <img src="https://via.placeholder.com/30x30" alt="profile" />                    
+                    <img src="{{asset('/')}}assets/images/30x30.png" alt="profile" />
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->username}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">

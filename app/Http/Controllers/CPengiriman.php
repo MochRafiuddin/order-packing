@@ -76,8 +76,8 @@ class CPengiriman extends Controller
                 $id_marketplace=1;
             }
 
-            if (!file_exists(public_path($my_pdf_path_for_example))) {
-                mkdir(public_path($my_pdf_path_for_example), 0777, true);                
+            if (!file_exists(public_path().'/'.$my_pdf_path_for_example)) {                
+                mkdir(public_path().'/'.$my_pdf_path_for_example, 0777, TRUE);                
 
                 $tipe = new MPengiriman();
                 $tipe->kode = $files->getClientOriginalName();
@@ -88,7 +88,7 @@ class CPengiriman extends Controller
                 $tipe->verifikasi = 0;
                 $tipe->save();
 
-                $files->move($my_pdf_path_for_example, $files->getClientOriginalName());
+                $files->move(public_path().'/'.$my_pdf_path_for_example, $files->getClientOriginalName());
             }else{
                 $tipe = new MPengiriman();
                 $tipe->kode = $files->getClientOriginalName();
@@ -99,7 +99,7 @@ class CPengiriman extends Controller
                 $tipe->verifikasi = 0;
                 $tipe->save();
 
-                $files->move($my_pdf_path_for_example, $files->getClientOriginalName());
+                $files->move(public_path().'/'.$my_pdf_path_for_example, $files->getClientOriginalName());
             }
         // }            
         return response()->json(['status' => 'ok', 'path' => $my_pdf_path_for_example.'/'.$files->getClientOriginalName()]);
@@ -152,11 +152,11 @@ class CPengiriman extends Controller
             $file = $my_pdf_path_for_example . $fileName;
 
             // dd($files);
-            if (!file_exists(public_path($my_pdf_path_for_example))) {
-                mkdir(public_path($my_pdf_path_for_example), 0777, true);
-                file_put_contents($file, $image_base64);
+            if (!file_exists(public_path().'/'.$my_pdf_path_for_example)) {                
+                mkdir(public_path().'/'.$my_pdf_path_for_example, 0777, TRUE);    
+                file_put_contents(public_path().'/'.$file, $image_base64);
             }else{
-                file_put_contents($file, $image_base64);
+                file_put_contents(public_path().'/'.$file, $image_base64);
             }            
             $log1 = MPengiriman::find($request->id);
             $log1->file = $fileName;
@@ -196,7 +196,7 @@ class CPengiriman extends Controller
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item editPost m-2" href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-original-title="Edit" >Print</a>
                                         <a class="dropdown-item varifPost m-2" href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-verifikasi="'.$row->verifikasi.'" data-gambar="'.$gambar.'" data-catatan="'.$row->catatan_verif.'" data-original-title="Edit" >Verifikasi</a>
-                                        <a class="dropdown-item delete m-2" href="javascript:void(0)" ref="'.url('pengiriman/delete/'.$row->id).'" >Hapus</a>
+                                        <a class="dropdown-item delete m-2" href="javascript:void(0)" href="'.url('pengiriman/delete/'.$row->id).'" >Hapus</a>
                                     </div>
                                 </div>';
                 return $btn;
