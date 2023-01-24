@@ -106,6 +106,8 @@
                 <br>                
                 <div id="results">.......Hasil Foto.......</div>
                 <canvas id="canvas" width='420' height='340' style="display: none;"></canvas>
+                <br>                
+                <div id="msg1"></div>
             </div>
             <div class="form-group col-12 text">
                 <br>                
@@ -199,6 +201,7 @@
                 $('.pilihan').show();
                 $('.gambar_file').show();
                 $('.text').show();
+                $('#catatan').val('');
             }else{
                 $('#results').show();
                 $('#camera').hide();
@@ -315,11 +318,12 @@ $('.kirim').click(function(){
         data: new FormData($('#form')[0]),
         processData: false,
         contentType: false,
-        success: function(response) {            
-            $('#ajaxModel').modal('hide');
+        success: function(response) {
             read_data();
             // $('.dropify-preview').hide();
-            document.getElementById('results').innerHTML = '.......Hasil Foto.......';
+            $("#msg1").html("<div class='alert alert-success alert-block'>\
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>Data Berhasil Disimpan</div>");
+            // document.getElementById('results').innerHTML = '.......Hasil Foto.......';
         }
     });    
 });

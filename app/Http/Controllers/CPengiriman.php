@@ -189,11 +189,16 @@ class CPengiriman extends Controller
                     $gambar = asset('upload/'.date('Ymd',strtotime($row->tanggal)).'/image/'.$row->file);
                 }else {
                     $gambar = '';
-                }                
-                
-                $btn .= '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-original-title="Edit" class="mr-2 text-success editPost"><span class="mdi mdi-printer" data-toggle="tooltip" data-placement="Top" title="Print"></span></a>';
-                $btn .= '<a href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-verifikasi="'.$row->verifikasi.'" data-gambar="'.$gambar.'" data-catatan="'.$row->catatan_verif.'" data-original-title="Edit" class="mr-2 text-warning varifPost"><span class="mdi mdi-checkbox-marked-outline" data-toggle="tooltip" data-placement="Top" title="Verifikasi"></span></a>';
-                $btn .= '<a href="'.url('pengiriman/delete/'.$row->id).'" class="text-primary delete"><span class="mdi mdi-delete" data-toggle="tooltip" data-placement="Top" title="Hapus Data"></span></a>';
+                }
+                                
+                $btn = '<div class="input-group-append">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opsi</button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item editPost m-2" href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-original-title="Edit" >Print</a>
+                                        <a class="dropdown-item varifPost m-2" href="javascript:void(0)" data-toggle="modal" data-id="'.$row->id.'" data-pdf="'.$pdf.'" data-verifikasi="'.$row->verifikasi.'" data-gambar="'.$gambar.'" data-catatan="'.$row->catatan_verif.'" data-original-title="Edit" >Verifikasi</a>
+                                        <a class="dropdown-item delete m-2" href="javascript:void(0)" ref="'.url('pengiriman/delete/'.$row->id).'" >Hapus</a>
+                                    </div>
+                                </div>';
                 return $btn;
             })
             ->editColumn('cetak', function ($row) {
